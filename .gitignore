@@ -1,0 +1,6 @@
+﻿jdk17/
+jdk21/
+*.zip
+web_prototype/node_modules/
+web_prototype/android/app/build/
+web_prototype/android/capacitor/build/

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MEI Hostel Management & Permission System</title>
+  <!-- Google Fonts & Material Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="picker.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- App Screen Shell -->
+    <div class="phone-screen">
+
+      <!-- NAVIGATION DRAWER OVERLAY -->
+      <div id="drawer-overlay" class="drawer-overlay">
+        <div class="nav-drawer">
+          <div class="drawer-header">
+            <img src="logo.png" alt="MEI Logo" class="drawer-logo-img">
+            <div class="drawer-title-group">
+              <span class="drawer-app-title">MEI Hostel</span>
+              <span class="drawer-app-subtitle">Student Management</span>
+            </div>
+          </div>
+          <div class="drawer-menu">
+            <button class="menu-item active" data-screen="dashboard">
+              <span class="material-icons-round">dashboard</span> Dashboard
+            </button>
+            <button class="menu-item" data-screen="request-list">
+              <span class="material-icons-round">article</span> Request List
+            </button>
+            <button class="menu-item" data-screen="pass-timing">
+              <span class="material-icons-round">access_time</span> Pass Timing
+            </button>
+            <button class="menu-item" data-screen="emergency">
+              <span class="material-icons-round">emergency_share</span> Emergency Request
+            </button>
+            <button class="menu-item" data-screen="parcel">
+              <span class="material-icons-round">inventory_2</span> Parcel Tracking
+            </button>
+            <button class="menu-item" data-screen="food">
+              <span class="material-icons-round">restaurant</span> Food Choice
+            </button>
+            <button class="menu-item" data-screen="profile">
+              <span class="material-icons-round">person</span> Profile
+            </button>
+            <button class="menu-item" data-screen="change-password">
+              <span class="material-icons-round">lock</span> Change Password
+            </button>
+            <div class="menu-divider"></div>
+            <button class="menu-item logout-btn">
+              <span class="material-icons-round">logout</span> Logout
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN APP APPBAR -->
+      <header class="appbar">
+        <button id="menu-btn" class="appbar-icon-btn">
+          <span class="material-icons-round">menu</span>
+        </button>
+        <button id="back-btn" class="appbar-icon-btn hidden">
+          <span class="material-icons-round">arrow_back</span>
+        </button>
+        <h1 id="screen-title" class="appbar-title">Dashboard</h1>
+        <div class="appbar-actions">
+          <button id="search-btn" class="appbar-icon-btn hidden">
+            <span class="material-icons-round">search</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- SEARCH BAR (HIDDEN BY DEFAULT) -->
+      <div id="search-bar-container" class="search-bar-container hidden">
+        <span class="material-icons-round search-input-icon">search</span>
+        <input type="text" id="search-input" placeholder="Search requests by type or reason...">
+        <button id="close-search-btn" class="appbar-icon-btn">
+          <span class="material-icons-round">close</span>
+        </button>
+      </div>
+
+      <!-- MAIN CONTENT WRAPPER -->
+      <main class="content-viewport">
+        
+        <!-- SCREEN 1: DASHBOARD -->
+        <section id="screen-dashboard" class="app-screen active">
+          <div class="welcome-card">
+            <div class="welcome-logo-svg">
+              <img src="logo.png" alt="MEI Logo" class="dashboard-logo-img">
+            </div>
+            <div class="welcome-text-group">
+              <span class="welcome-label">Welcome</span>
+              <h2 class="student-name">Abishek S</h2>
+            </div>
+          </div>
+        </section>
+
+        <!-- SCREEN 3: REQUEST LIST -->
+        <section id="screen-request-list" class="app-screen">
+          <div id="request-list-container" class="request-list-container">
+            <!-- Dynamic request cards populated by JS -->
+          </div>
+          
+          <!-- Floating Action Button -->
+          <button id="fab-create-request" class="fab">
+            <span class="material-icons-round">add</span>
+          </button>
+        </section>
+
+        <!-- SCREEN 5: PROFILE -->
+        <section id="screen-profile" class="app-screen screen-padding">
+          <div class="profile-header-card">
+            <div class="profile-avatar">AS</div>
+            <h2 class="profile-name">Abishek S</h2>
+            <span class="profile-reg">Reg No: 21CSR012</span>
+          </div>
+
+          <div class="profile-grid">
+            <div class="profile-section-card">
+              <div class="profile-section-title">
+                <span class="material-icons-round">person_outline</span> Personal Details
+              </div>
+              <div class="profile-divider"></div>
+              <div class="profile-field">
+                <label>Full Name</label>
+                <input type="text" id="profile-name-input" class="profile-name-input-field" value="Abishek S" placeholder="Enter Full Name">
+              </div>
+              <div class="profile-field">
+                <label>Email Address</label>
+                <span>abishek.s@meicollege.edu</span>
+              </div>
+              <div class="profile-field">
+                <label>Mobile Number</label>
+                <span>+91 98765 43210</span>
+              </div>
+              <button type="button" id="save-profile-btn" class="btn btn-purple btn-block mt-3">SAVE CHANGES</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- SCREEN 6: PASS TIMING -->
+        <section id="screen-pass-timing" class="app-screen screen-padding">
+          <div class="timetable-card">
+            <div class="timetable-header">
+              <span class="material-icons-round text-blue">schedule</span>
+              <h4>Outing & Entry Timetable</h4>
+            </div>
+            <div class="profile-divider"></div>
+            <div class="timetable-row">
+              <span class="timetable-type">Weekday Outing</span>
+              <span class="timetable-days">Wed & Fri</span>
+              <span class="timetable-hours">04:30 PM - 07:00 PM</span>
+            </div>
+            <div class="timetable-row">
+              <span class="timetable-type">Weekend Outing</span>
+              <span class="timetable-days">Saturday</span>
+              <span class="timetable-hours">01:30 PM - 08:00 PM</span>
+            </div>
+            <div class="timetable-row">
+              <span class="timetable-type">Weekend Outing</span>
+              <span class="timetable-days">Sunday</span>
+              <span class="timetable-hours">07:00 AM - 08:00 PM</span>
+            </div>
+            <div class="timetable-row">
+              <span class="timetable-type">Night Curfew</span>
+              <span class="timetable-days">Daily</span>
+              <span class="timetable-hours">08:30 PM</span>
+            </div>
+            <div class="timetable-row">
+              <span class="timetable-type">Mess Breakfast</span>
+              <span class="timetable-days">Daily</span>
+              <span class="timetable-hours">07:15 AM - 08:30 AM</span>
+            </div>
+            <div class="timetable-row">
+              <span class="timetable-type">Mess Lunch</span>
+              <span class="timetable-days">Daily</span>
+              <span class="timetable-hours">12:15 PM - 01:45 PM</span>
+            </div>
+            <div class="timetable-row mb-0">
+              <span class="timetable-type">Mess Dinner</span>
+              <span class="timetable-days">Daily</span>
+              <span class="timetable-hours">07:30 PM - 09:00 PM</span>
+            </div>
+          </div>
+
+          <div class="rules-flex-grid">
+            <div class="rule-card purple-rule">
+              <div class="rule-header">
+                <span class="material-icons-round">weekend</span>
+                <h4>Weekend Outing Rules</h4>
+              </div>
+              <div class="profile-divider"></div>
+              <ul class="rule-list">
+                <li>Weekend passes must be submitted at least 24 hours prior to checkout time.</li>
+                <li>Outing permissions are granted only after receiving automated SMS confirmation from parents.</li>
+                <li>Late entries beyond 08:00 PM on Sunday will attract disciplinary action.</li>
+                <li>Students must carry their college ID card and biometric punch is mandatory.</li>
+              </ul>
+            </div>
+
+            <div class="rule-card orange-rule">
+              <div class="rule-header">
+                <span class="material-icons-round">flight_takeoff</span>
+                <h4>Holiday/Vacation Guidelines</h4>
+              </div>
+              <div class="profile-divider"></div>
+              <ul class="rule-list">
+                <li>Holiday requests must be raised 3 days in advance and require Warden approval.</li>
+                <li>In case of medical leaves, students must produce a medical certificate during checkin.</li>
+                <li>Mess charges rebated only if the student is absent for 5 days or more with prior approval.</li>
+                <li>Students must clean rooms and shut off all electrical appliances before leaving.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- SCREEN 7: EMERGENCY REQUEST -->
+        <section id="screen-emergency" class="app-screen screen-padding">
+          <div class="danger-banner">
+            <span class="material-icons-round danger-icon">report_problem</span>
+            <div class="danger-banner-text">
+              <h5>EMERGENCY DISPATCH</h5>
+              <p>Only submit this request for urgent matters. Misuse will lead to disciplinary action.</p>
+            </div>
+          </div>
+
+          <form id="emergency-form" class="emergency-card">
+            <h4>Raise Emergency Alert</h4>
+            <div class="profile-divider"></div>
+
+            <div class="form-group">
+              <label for="emergency-type">Emergency Type</label>
+              <select id="emergency-type" class="form-control" required>
+                <option>Medical Emergency</option>
+                <option>Family Urgency</option>
+                <option>Critical Structural Issue</option>
+                <option>Electrical Hazard</option>
+                <option>Water Supply Failure</option>
+                <option>Security Concern</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="emergency-desc">Detailed Description</label>
+              <textarea id="emergency-desc" class="form-control" rows="3" placeholder="Describe the emergency in detail so the warden can act immediately..." required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="emergency-contact">Urgent Contact Number</label>
+              <input type="tel" id="emergency-contact" class="form-control" placeholder="Your mobile or parent mobile number" required>
+            </div>
+
+            <div class="form-group">
+              <label>Upload Proof (Optional)</label>
+              <button type="button" id="upload-proof-btn" class="btn btn-outlined-danger btn-block">
+                <span class="material-icons-round">cloud_upload</span> SELECT & ATTACH PROOF
+              </button>
+              <div id="proof-file-name" class="proof-file-name hidden"></div>
+            </div>
+
+            <button type="submit" class="btn btn-danger btn-block mt-4">SUBMIT EMERGENCY REQUEST</button>
+          </form>
+
+          <h3 class="section-title">Past Emergency Submissions</h3>
+          <div id="emergency-history-list" class="emergency-history-list">
+            <!-- Dynamic past emergency logs populated by JS -->
+          </div>
+        </section>
+
+        <!-- SCREEN 8: FOOD CHOICE -->
+        <section id="screen-food" class="app-screen screen-padding">
+          <h3 class="section-title">Select Date for Meal Preference</h3>
+          
+          <div id="food-calendar-strip" class="food-calendar-strip">
+            <!-- Dynamic dates strip populated by JS -->
+          </div>
+
+          <div class="warning-banner mt-3">
+            <span class="material-icons-round text-warning">info_outline</span>
+            <p>Changes for tomorrow's meals must be submitted before 5:00 PM today.</p>
+          </div>
+
+          <!-- Breakfast Card -->
+          <div class="meal-choice-card">
+            <div class="meal-choice-header">
+              <div class="meal-title-group">
+                <span class="material-icons-round text-purple">free_breakfast</span>
+                <h4>Breakfast Selection</h4>
+              </div>
+              <span class="meal-time">07:15 AM - 08:30 AM</span>
+            </div>
+            <div class="profile-divider"></div>
+            <div class="meal-options-row" data-meal="breakfast">
+              <button class="meal-opt-btn active" data-type="veg">
+                <span class="material-icons-round text-green">circle</span> Vegetarian
+              </button>
+              <button class="meal-opt-btn" data-type="nonVeg">
+                <span class="material-icons-round text-red">change_history</span> Non-Veg
+              </button>
+              <button class="meal-opt-btn" data-type="special">
+                <span class="material-icons-round text-gold">star</span> Special Meal
+              </button>
+            </div>
+          </div>
+
+          <!-- Lunch Card -->
+          <div class="meal-choice-card">
+            <div class="meal-choice-header">
+              <div class="meal-title-group">
+                <span class="material-icons-round text-purple">lunch_dining</span>
+                <h4>Lunch Selection</h4>
+              </div>
+              <span class="meal-time">12:15 PM - 01:45 PM</span>
+            </div>
+            <div class="profile-divider"></div>
+            <div class="meal-options-row" data-meal="lunch">
+              <button class="meal-opt-btn active" data-type="veg">
+                <span class="material-icons-round text-green">circle</span> Vegetarian
+              </button>
+              <button class="meal-opt-btn" data-type="nonVeg">
+                <span class="material-icons-round text-red">change_history</span> Non-Veg
+              </button>
+              <button class="meal-opt-btn" data-type="special">
+                <span class="material-icons-round text-gold">star</span> Special Meal
+              </button>
+            </div>
+          </div>
+
+          <!-- Dinner Card -->
+          <div class="meal-choice-card">
+            <div class="meal-choice-header">
+              <div class="meal-title-group">
+                <span class="material-icons-round text-purple">dinner_dining</span>
+                <h4>Dinner Selection</h4>
+              </div>
+              <span class="meal-time">07:30 PM - 09:00 PM</span>
+            </div>
+            <div class="profile-divider"></div>
+            <div class="meal-options-row" data-meal="dinner">
+              <button class="meal-opt-btn active" data-type="veg">
+                <span class="material-icons-round text-green">circle</span> Vegetarian
+              </button>
+              <button class="meal-opt-btn" data-type="nonVeg">
+                <span class="material-icons-round text-red">change_history</span> Non-Veg
+              </button>
+              <button class="meal-opt-btn" data-type="special">
+                <span class="material-icons-round text-gold">star</span> Special Meal
+              </button>
+            </div>
+          </div>
+
+          <div class="success-alert-card mt-3">
+            <span class="material-icons-round text-success">check_circle_outline</span>
+            <span>Preferences are auto-saved on selection</span>
+          </div>
+        </section>
+
+        <!-- SCREEN 9: PARCEL TRACKING -->
+        <section id="screen-parcel" class="app-screen screen-padding">
+          <div class="qr-card">
+            <h4>Student Pickup QR Code</h4>
+            <p class="qr-sub">Show this QR to the hostel security guard to retrieve your parcels.</p>
+            
+            <!-- Mock QR code styling -->
+            <div class="qr-wrapper">
+              <div class="mock-qr">
+                <div class="qr-corner qr-top-left"></div>
+                <div class="qr-corner qr-top-right"></div>
+                <div class="qr-corner qr-bottom-left"></div>
+                <!-- Mini simulated blocks inside QR code -->
+                <div class="qr-grid"></div>
+              </div>
+            </div>
+            <span class="qr-code-text">REG ID: 21CSR012</span>
+          </div>
+
+          <div class="notifications-switch-card mt-3">
+            <div class="switch-left">
+              <span class="material-icons-round text-blue">notifications_active</span>
+              <span>Instant SMS & App Alerts</span>
+            </div>
+            <label class="switch-toggle">
+              <input type="checkbox" checked id="sms-notification-toggle">
+              <span class="slider-round"></span>
+            </label>
+          </div>
+
+          <button id="simulate-parcel-btn" class="btn btn-purple btn-block mt-3">
+            <span class="material-icons-round">qr_code_scanner</span> SIMULATE GUARD NEW PARCEL ENTRY
+          </button>
+
+          <h3 class="section-title">Parcel Delivery History</h3>
+          <div id="parcel-history-list" class="parcel-history-list">
+            <!-- Dynamic parcel logs populated by JS -->
+          </div>
+        </section>
+
+        <!-- SCREEN 10: CHANGE PASSWORD -->
+        <section id="screen-change-password" class="app-screen screen-padding">
+          <form id="change-password-form" class="change-password-card">
+            <h4>Update Password</h4>
+            <p class="card-subtitle">Ensure your new password contains letters, numbers, and special characters.</p>
+            <div class="profile-divider"></div>
+
+            <div class="form-group">
+              <label for="current-password">Current Password</label>
+              <div class="password-input-wrapper">
+                <span class="material-icons-round pass-icon-left">lock_open</span>
+                <input type="password" id="current-password" class="form-control pass-input" placeholder="Enter current password" required>
+                <button type="button" class="pass-toggle-btn">
+                  <span class="material-icons-round">visibility_off</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="new-password">New Password</label>
+              <div class="password-input-wrapper">
+                <span class="material-icons-round pass-icon-left">lock</span>
+                <input type="password" id="new-password" class="form-control pass-input" placeholder="Enter new password" required>
+                <button type="button" class="pass-toggle-btn">
+                  <span class="material-icons-round">visibility_off</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirm-password">Confirm New Password</label>
+              <div class="password-input-wrapper">
+                <span class="material-icons-round pass-icon-left">lock</span>
+                <input type="password" id="confirm-password" class="form-control pass-input" placeholder="Confirm new password" required>
+                <button type="button" class="pass-toggle-btn">
+                  <span class="material-icons-round">visibility_off</span>
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-purple btn-block mt-4">UPDATE PASSWORD</button>
+          </form>
+        </section>
+
+      </main>
+
+      <!-- SCREEN 4: CREATE REQUEST MODAL POPUP -->
+      <div id="create-request-modal" class="modal-overlay">
+        <div class="modal-card">
+          <!-- Close button top right -->
+          <button id="close-modal-btn" class="modal-close-x">
+            <span class="material-icons-round">close</span>
+          </button>
+
+          <!-- Centered title -->
+          <h4 class="modal-title-center">Holiday/Permission Request</h4>
+
+          <form id="create-request-form">
+            <!-- Request Type Dropdown -->
+            <div class="modal-field-group">
+              <div class="modal-select-wrapper">
+                <select id="req-type" class="modal-select-pill" required>
+                  <option value="" disabled selected>Select</option>
+                  <option>Holiday</option>
+                  <option>Leave</option>
+                  <option>Semester Holiday</option>
+                  <option>Outing</option>
+                  <option>Interview</option>
+                  <option>Symposium</option>
+                  <option>NPTEL/GATE</option>
+                  <option>Industrial Visit</option>
+                  <option>Medical Leave</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- From Date + Time Out row -->
+            <div class="modal-field-group">
+              <div class="modal-datetime-row">
+                <span class="material-icons-round modal-row-icon">calendar_month</span>
+                <span class="modal-row-sep-line"></span>
+                <span id="from-date-display" class="modal-dt-display modal-dt-placeholder">From</span>
+                <span class="material-icons-round modal-row-icon">access_time</span>
+                <span class="modal-row-sep-line"></span>
+                <span id="from-time-display" class="modal-dt-display modal-dt-placeholder">Time Out</span>
+                <button type="button" class="modal-cal-picker-btn" onclick="openDateThenTime('from')">
+                  <span class="material-icons-round">event</span>
+                  <span class="modal-cal-plus">+</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- To Date + Time In row -->
+            <div class="modal-field-group">
+              <div class="modal-datetime-row">
+                <span class="material-icons-round modal-row-icon">calendar_month</span>
+                <span class="modal-row-sep-line"></span>
+                <span id="to-date-display" class="modal-dt-display modal-dt-placeholder">To</span>
+                <span class="material-icons-round modal-row-icon">access_time</span>
+                <span class="modal-row-sep-line"></span>
+                <span id="to-time-display" class="modal-dt-display modal-dt-placeholder">Time In</span>
+                <button type="button" class="modal-cal-picker-btn" onclick="openDateThenTime('to')">
+                  <span class="material-icons-round">event</span>
+                  <span class="modal-cal-plus">+</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Reason input -->
+            <div class="modal-field-group">
+              <input type="text" id="req-reason" class="modal-reason-input" placeholder="Enter Reason here" required>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="modal-submit-btn">SUBMIT</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- SUCCESS TOAST NOTIFICATION -->
+      <div id="toast-notification" class="toast-notification">
+        <span class="material-icons-round toast-icon">check_circle</span>
+        <span id="toast-message" class="toast-message">Success message here</span>
+      </div>
+
+      <!-- CUSTOM DARK DATE PICKER -->
+      <div id="custom-date-picker" class="cpicker-overlay">
+        <div class="cpicker-card">
+          <div class="cpicker-date-header">
+            <div id="cpicker-year-label" class="cpicker-year">2026</div>
+            <div id="cpicker-selected-label" class="cpicker-selected-date">Sun, 7 Jun</div>
+          </div>
+          <div class="cpicker-cal-body">
+            <div class="cpicker-month-nav">
+              <button id="cpicker-prev" class="cpicker-nav-arrow">&#8592;</button>
+              <span id="cpicker-month-label" class="cpicker-month-title">June 2026</span>
+              <button id="cpicker-next" class="cpicker-nav-arrow">&#8594;</button>
+            </div>
+            <div class="cpicker-day-names">
+              <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+            </div>
+            <div id="cpicker-days-grid" class="cpicker-days-grid"></div>
+          </div>
+          <div class="cpicker-actions">
+            <button id="cpicker-date-cancel" class="cpicker-btn-cancel">CANCEL</button>
+            <button id="cpicker-date-ok" class="cpicker-btn-ok">OK</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CUSTOM DARK CLOCK PICKER -->
+      <div id="custom-time-picker" class="cpicker-overlay">
+        <div class="cpicker-card">
+          <div class="cpicker-time-display">
+            <div class="cpicker-time-digits">
+              <span id="cpicker-hr-display" class="cpicker-time-part active-part">08</span>
+              <span class="cpicker-time-colon-big">:</span>
+              <span id="cpicker-min-display" class="cpicker-time-part">00</span>
+            </div>
+            <div class="cpicker-ampm-stack">
+              <div id="cpicker-am-btn" class="cpicker-ampm-item active-ampm">AM</div>
+              <div id="cpicker-pm-btn" class="cpicker-ampm-item">PM</div>
+            </div>
+          </div>
+          <div class="cpicker-clock-face" id="cpicker-clock-face">
+            <div class="cpicker-clock-hand" id="cpicker-clock-hand"></div>
+            <div class="cpicker-clock-center"></div>
+          </div>
+          <div class="cpicker-actions">
+            <div style="flex:1"></div>
+            <button id="cpicker-time-cancel" class="cpicker-btn-cancel">CANCEL</button>
+            <button id="cpicker-time-ok" class="cpicker-btn-ok">OK</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+  <script src="app.js"></script>
+</body>
+</html>

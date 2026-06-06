@@ -1,0 +1,300 @@
+/* ============================================
+   CUSTOM DARK DATE & TIME PICKER
+   ============================================ */
+
+.cpicker-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 5, 40, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  box-sizing: border-box;
+}
+
+.cpicker-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cpicker-card {
+  width: 100%;
+  max-width: 360px;
+  background: #1a1a2e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 60px rgba(0,0,0,0.6);
+}
+
+/* ---- DATE HEADER ---- */
+.cpicker-date-header {
+  background: #16213e;
+  padding: 20px 24px 16px;
+}
+
+.cpicker-year {
+  font-size: 14px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 4px;
+  font-family: 'Caveat', cursive, sans-serif;
+  font-weight: 400;
+}
+
+.cpicker-selected-date {
+  font-size: 30px;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: 'Caveat', cursive, sans-serif;
+  line-height: 1.1;
+}
+
+/* ---- CALENDAR BODY ---- */
+.cpicker-cal-body {
+  background: #1a1a2e;
+  padding: 16px 20px 8px;
+}
+
+.cpicker-month-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.cpicker-month-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  font-family: 'Caveat', cursive, sans-serif;
+}
+
+.cpicker-nav-arrow {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 50%;
+  transition: background 0.15s;
+}
+
+.cpicker-nav-arrow:hover { background: rgba(255,255,255,0.1); }
+
+/* Day name headers */
+.cpicker-day-names {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 8px;
+}
+
+.cpicker-day-names span {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  padding: 4px 0;
+}
+
+/* Days grid */
+.cpicker-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.cpicker-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: 'Caveat', cursive, sans-serif;
+  font-weight: 500;
+}
+
+.cpicker-day:hover { background: rgba(255,255,255,0.12); }
+
+.cpicker-day.empty { pointer-events: none; color: rgba(255,255,255,0.2); }
+
+.cpicker-day.today { color: #00e5cc; }
+
+.cpicker-day.selected {
+  background: #00bfa5;
+  color: #fff;
+  font-weight: 700;
+}
+
+.cpicker-day.other-month { color: rgba(255,255,255,0.2); }
+
+/* ---- ACTIONS ---- */
+.cpicker-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 20px 18px;
+}
+
+.cpicker-btn-cancel, .cpicker-btn-ok {
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.cpicker-btn-cancel { color: rgba(255,255,255,0.55); }
+.cpicker-btn-cancel:hover { color: #fff; }
+.cpicker-btn-ok { color: #7C4DFF; }
+.cpicker-btn-ok:hover { color: #9E6EFF; }
+
+/* ============================================
+   CLOCK / TIME PICKER
+   ============================================ */
+
+.cpicker-time-display {
+  background: #16213e;
+  padding: 20px 24px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.cpicker-time-digits {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cpicker-time-part {
+  font-size: 48px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.45);
+  font-family: 'Caveat', cursive, sans-serif;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: color 0.15s;
+  line-height: 1;
+}
+
+.cpicker-time-part.active-part {
+  color: #ffffff;
+  background: rgba(0, 191, 165, 0.2);
+}
+
+.cpicker-time-colon-big {
+  font-size: 48px;
+  color: rgba(255,255,255,0.6);
+  font-family: 'Caveat', cursive, sans-serif;
+  line-height: 1;
+}
+
+.cpicker-ampm-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cpicker-ampm-item {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.4);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: all 0.15s;
+}
+
+.cpicker-ampm-item.active-ampm {
+  color: #00bfa5;
+  border-color: #00bfa5;
+}
+
+/* ---- CLOCK FACE ---- */
+.cpicker-clock-face {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  background: #0f3460;
+  border-radius: 50%;
+  margin: 0 auto 8px;
+}
+
+.cpicker-clock-num {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #fff;
+  font-family: 'Caveat', cursive, sans-serif;
+  font-weight: 500;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.15s;
+  transform: translate(-50%, -50%);
+}
+
+.cpicker-clock-num:hover { background: rgba(255,255,255,0.1); }
+
+.cpicker-clock-num.selected-num {
+  background: #00bfa5;
+  color: #fff;
+}
+
+/* Clock hand */
+.cpicker-clock-hand {
+  position: absolute;
+  width: 2px;
+  background: #00bfa5;
+  border-radius: 2px;
+  transform-origin: bottom center;
+  bottom: 50%;
+  left: 50%;
+  margin-left: -1px;
+  height: 80px;
+  transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+  z-index: 1;
+}
+
+.cpicker-clock-hand::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: #00bfa5;
+  border-radius: 50%;
+}
+
+/* Center dot */
+.cpicker-clock-center {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #00bfa5;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
